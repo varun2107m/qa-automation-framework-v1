@@ -20,18 +20,24 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+          playwright install chromium              # ← only chromium, faster than all browsers
+          playwright install-deps chromium         # ← installs OS-level deps needed in CI
 
       - name: Run tests
         env:
           ENV: dev
+          HEADLESS: true                           # ← ADDED: CI has no display, must be headless
+          REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
           API_KEY: ${{ secrets.API_KEY }}
         run: |
           pytest -v --alluredir=reports/allure-results
 
       - name: Upload Allure results
+        if: always()                               # ← ADDED: upload report even when tests fail
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
           path: reports/allure-results
           
+
 
