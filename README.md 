@@ -1,0 +1,144 @@
+QA Automation Framework (API + UI + BDD)
+
+A scalable automation framework using:
+
+Playwright (UI automation)
+Requests (API automation)
+Pytest + BDD (test orchestration)
+Allure Reports (reporting)
+YAML-based config system
+Makefile for one-command execution
+
+Project Structure:
+
+qa-automation-framework-v1/
+│
+├── api/
+├── ui/
+├── tests/
+├── utils/
+├── config/
+├── schemas/
+├── reports/
+├── conftest.py
+├── Makefile
+└── .env.example
+
+Setup Instructions:
+
+1. Clone Repository:
+
+git clone <repo-url>
+cd qa-automation-framework
+
+2. Create Virtual Environment:
+
+python3 -m venv venv
+source venv/bin/activate
+
+3. Install Dependencies:
+
+make install or pip install -r requirements.txt
+
+4. Install Playwright Browsers:
+
+playwright install
+
+5. Setup Environment File:
+
+cp .env.example .env
+
+Update required values:
+
+ENV=dev
+API_KEY=your_key_here
+
+--------------------------------------------------
+--------------------------------------------------
+
+Running Tests:
+
+Run All Tests
+make test OR pytest -v
+
+RUN API tests only:
+
+pytest tests/step_definitions/api -v
+
+RUN UI tests only:
+
+pytest tests/step_definitions/ui -v
+
+
+----------------------------------------------------
+----------------------------------------------------
+
+Reports (Allure):
+
+Generate & Open Report:
+
+make report or allure serve reports/allure-results
+
+Clean Old Reports:
+
+make clean
+
+---------------------------------------------------
+-------------------------------------------------
+
+Framework Features
+API Layer:
+Retry mechanism
+Config-driven base URL
+Schema validation
+Auth token handling
+Logging + Allure integration
+
+UI Layer:
+Playwright wrapper (BasePage)
+Built-in waits
+Screenshot on failure
+Reusable assertions
+
+BDD Layer:
+Pytest-BDD scenarios
+Reusable step definitions
+Tag support (@api, @ui)
+
+-------------------------------------------------
+-------------------------------------------------
+
+Configuration System:
+
+Environment-based config:
+
+config/environments.yaml
+
+Supports:
+
+dev / staging / prod switching
+dynamic env variable injection ${VAR}
+API + UI config separation
+
+------------------------------------------------
+-------------------------------------------------
+
+Test Execution Flow:
+
+Startup validation runs
+Config loaded dynamically
+API/UI tests executed
+Logs captured
+Allure results generated
+
+-------------------------------------------------
+-------------------------------------------------
+
+Makefile Commands
+
+| Command      | Description          |
+| ------------ | -------------------- |
+| make test    | Run all tests        |
+| make report  | Open Allure report   |
+| make clean   | Remove old reports   |
+| make install | Install dependencies |

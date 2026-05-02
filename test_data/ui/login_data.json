@@ -1,0 +1,13 @@
+{
+  "valid_user": {
+    "username": "standard_user",
+    "password": "secret_sauce"
+  },
+  "invalid_user": {
+    "username": "wrong_user",
+    "password": "wrong_pass"
+  },
+  "expected_errors": {
+    "invalid_credentials": "Epic sadface"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "get_user": {
+    "id": 2
+  },
+  "create_user": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user"
+  },
+  "update_user": {
+    "name": "John Updated",
+    "email": "john.updated@example.com"
+  }
+}
+

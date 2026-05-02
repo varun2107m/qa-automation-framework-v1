@@ -1,0 +1,61 @@
+dev:
+  base_url: "https://www.saucedemo.com"
+  api_url: "https://reqres.in/api"
+
+  headers:
+    Content-Type: "application/json"
+    Accept: "application/json"
+    x-api-key: "${REQRES_API_KEY}"
+
+  database:
+    host: "dev-db.yourapp.com"
+    port: 5432
+
+  browser:
+    type: "chromium"
+    headless: false
+
+  api:
+    timeout: 10
+    retry_count: 2
+    retry_delay: 1
+
+
+staging:
+  base_url: "https://www.saucedemo.com"
+  api_url: "https://reqres.in/api"
+
+  headers:
+    Content-Type: "application/json"
+    Accept: "application/json"
+    x-api-key: "${REQRES_API_KEY}"
+
+  browser:
+    type: "chromium"
+    headless: true
+
+  api:
+    timeout: 10
+    retry_count: 2
+    retry_delay: 1
+
+
+prod:
+  base_url: "https://www.saucedemo.com"
+  api_url: "https://reqres.in/api"
+
+  headers:
+    Content-Type: "application/json"
+    Accept: "application/json"
+    x-api-key: "${REQRES_API_KEY}"
+
+  browser:
+    type: "chromium"
+    headless: true
+
+  api:
+    timeout: 10
+    retry_count: 2
+    retry_delay: 1
+
+

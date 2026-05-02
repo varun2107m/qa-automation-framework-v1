@@ -1,0 +1,15 @@
+browser:
+  type: "chromium"
+  headless: true
+  slow_mo: 0
+  timeout: 30000
+
+api:
+  timeout: 10
+  retry_count: 3
+
+reporting:
+  screenshot_on_failure: true
+  allure_dir: "reports/allure-results"
+  
+
