@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -18,10 +18,12 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Install Playwright browsers
-        run: playwright install --with-deps chromium   # ← replaces both install + install-deps
+        run: playwright install chromium
 
       - name: Run tests
         env:
@@ -37,7 +39,8 @@ jobs:
         with:
           name: allure-results
           path: reports/allure-results
-          
+
+
 
 
 
