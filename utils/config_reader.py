@@ -27,7 +27,7 @@ def resolve_env_variables(value):
         matches = re.findall(r"\$\{(.*?)\}", value)
 
         for var in matches:
-            env_value = os.getenv(var)
+            env_value = os.getenv(var, "dummy_key")
 
             # ✅ FIX: strict + controlled fallback
             if env_value is None:

@@ -1,7 +1,7 @@
 import os
 from utils.config_reader import get_environment_config
 
-REQUIRED_SECRETS = ["API_KEY"]
+REQUIRED_SECRETS = ["ENV"]
 
 def check_env():
     env = os.getenv("ENV")
