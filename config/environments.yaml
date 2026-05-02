@@ -47,11 +47,10 @@ prod:
   headers:
     Content-Type: "application/json"
     Accept: "application/json"
-    x-api-key: "${REQRES_API_KEY}"
 
   browser:
     type: "chromium"
-    headless: true
+    headless: false
 
   api:
     timeout: 10
