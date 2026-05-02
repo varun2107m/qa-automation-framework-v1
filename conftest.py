@@ -1,11 +1,10 @@
-# ✅ 10/10 - Plug & Play Ready conftest.py
-
 import pytest
 from playwright.sync_api import sync_playwright, Page
 from typing import Generator
 from api.client import APIClient
 from utils.config_reader import get_environment_config
 from utils.logger import get_logger
+import os
 
 from utils.startup_validator import (
     check_env,
@@ -36,9 +35,21 @@ def pytest_sessionstart(session):
 def browser_instance():
     config = get_environment_config()
 
-    env = config
     browser_type = config["browser"].get("type", "chromium")
-    headless = config["browser"].get("headless", True)
+
+    # ✅ Priority: ENV → config → default
+    env_headless = os.getenv("HEADLESS")
+    config_headless = config["browser"].get("headless", True)
+
+    if env_headless is not None:
+        headless = env_headless.lower() == "true"
+    else:
+        headless = config_headless
+
+    # ✅ FORCE headless in CI (critical fix)
+    is_ci = os.getenv("CI", "false").lower() == "true"
+    if is_ci:
+        headless = True
 
     logger.info(f"Launching {browser_type} | headless={headless}")
 
@@ -47,15 +58,15 @@ def browser_instance():
         yield browser
         browser.close()
 
-@pytest.fixture(scope="function")
-def page(browser_instance) -> Generator[Page, None, None]:
+
+@pytest.fixture(scope="function")                    # ← THIS WAS MISSING
+def page(browser_instance) -> Page:
     context = browser_instance.new_context()
     page = context.new_page()
+    yield page
+    page.close()
+    context.close()
 
-    try:
-        yield page
-    finally:
-        context.close()
 
 # ───────────────────────────────────────────────────────────
 # 🔌 API Fixtures
@@ -72,3 +83,4 @@ def api_client() -> APIClient:
 @pytest.fixture(scope="function")
 def response_store() -> dict:
     return {}
+

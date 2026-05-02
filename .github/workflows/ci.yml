@@ -30,7 +30,7 @@ jobs:
           ENV: dev
           HEADLESS: true
           REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
-          API_KEY: ${{ secrets.API_KEY }}
+          
         run: pytest -v --alluredir=reports/allure-results
 
       - name: Upload Allure results

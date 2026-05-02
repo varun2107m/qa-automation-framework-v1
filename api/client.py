@@ -1,3 +1,5 @@
+import os
+
 import requests
 import time
 import json
@@ -37,7 +39,7 @@ class APIClient:
         headers = {
          "Content-Type": "application/json",
          "Accept": "application/json",
-        "x-api-key": get_api_key()
+        "x-api-key": os.getenv("REQRES_API_KEY", "")
 }
 
     # Merge env headers (override-safe)
